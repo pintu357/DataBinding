@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.practice.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), View.OnClickListener  {
@@ -20,56 +21,35 @@ class MainActivity : AppCompatActivity(), View.OnClickListener  {
         binding= DataBindingUtil.setContentView(this,R.layout.activity_main)
 
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        binding.button.setOnClickListener(this)
+        // Used in put listener on button
+       /* binding.button.setOnClickListener(this)*/
 
-        mainViewModel.status.observe(this, {
+        //Observe Live data in MainViewModel
+        /*mainViewModel.status.observe(this, {
                 binding.textView.text = mainViewModel.status.value
-        })
+        })*/
 
+        //Part Of data binding
         binding.mainViewModel = mainViewModel
+
+        //Put Listener on a Button
         /*binding.button.setOnClickListener( object : View.OnClickListener{
             override fun onClick(view: View?) {
                 Log.d("Pintu:", "Inside Listener")
                 mainViewModel.updateName()
             }
         })*/
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        val song = listOf("bfdjgbdj")
+        binding.recyclerView.adapter = MyAdapter(song)
+
     }
 
     override fun onClick(view: View?) {
-        when(view){
+        /*when(view){
             binding.button->{
 
             }
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d("Pintu:", "onStart1")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("Pintu:", "onResume1")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d("Pintu:", "onPause1")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("Pintu:", "onStop1")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("Pintu:", "onDestroy1")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.d("Pintu:", "onRestart1")
+        }*/
     }
 }
